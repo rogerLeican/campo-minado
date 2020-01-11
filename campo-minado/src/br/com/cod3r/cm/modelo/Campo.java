@@ -18,6 +18,36 @@ public class Campo {
 	Campo (int linha, int coluna){
 		this.linha = linha;
 		this.coluna = coluna;
-		
 	}
+	
+	boolean adicionarVizinho(Campo candidatoDeVizinho) {
+		
+		boolean linhaDiferente = linha != candidatoDeVizinho.linha;
+		boolean colunaDiferente = coluna != candidatoDeVizinho.coluna;
+		boolean diagonal = linhaDiferente && colunaDiferente;
+		
+		int deltaLinha = Math.abs(linha - candidatoDeVizinho.linha);
+		int deltaColuna = Math.abs(coluna - candidatoDeVizinho.coluna);
+		int deltaGeral = deltaColuna + deltaLinha ;
+		
+		if(deltaGeral == 1 && !diagonal) {
+			vizinhos.add(candidatoDeVizinho);
+			return true; 
+		}else if(deltaGeral == 2 && diagonal ) {
+			vizinhos.add(candidatoDeVizinho);
+			return true;
+		}else {
+				return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
