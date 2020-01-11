@@ -2,6 +2,7 @@ package br.com.cod3r.cm.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Tabuleiro {
 	
@@ -43,10 +44,29 @@ public class Tabuleiro {
 
 	private void sortearMinas() {
 		
+		long minasArmadas = 0;
+		Predicate<Campo> minado = c-> c.isMinado();
+		
+		do {
+			
+			minasArmadas = campos.stream().filter(minado).count();
+			int aleatorio = (int)(Math.random()* campos.size());
+			campos.get(aleatorio).minar();
+			
+		}while(minasArmadas < quantidadeMinas);
 	}
-
-
-
+	
+	public boolean objetivoAlcançado() {
+		return campos.stream().allMatch(c -> c.objetivoAlcançado());
+	}
+	
+	public void reiniciar () {
+		campos.stream().forEach(c -> c.reiniciar());
+		sortearMinas();
+	}
+	
+	
+	
 
 	
 	
