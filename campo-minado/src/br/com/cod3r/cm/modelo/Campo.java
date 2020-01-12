@@ -3,7 +3,7 @@ package br.com.cod3r.cm.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.cod3r.cm.excecao.explosaoException;
+import br.com.cod3r.cm.excecao.ExplosaoException;
 
 public class Campo {
 	
@@ -54,7 +54,7 @@ public class Campo {
 			aberto = true;
 			
 			if(minado) {
-				throw new explosaoException();
+				throw new ExplosaoException();
 			}
 
 			if(vizinhancaSegura()) {
@@ -84,6 +84,10 @@ public class Campo {
 		return marcado;
 	}
 	
+	void setAberto(boolean aberto) {
+		this.aberto = aberto;
+	}
+
 	public boolean isAberto() {
 		return aberto;
 	}
