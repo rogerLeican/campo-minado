@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import br.com.cod3r.cm.excecao.ExplosaoException;
+
 public class Tabuleiro {
 	
 	private int quantidadeLinhas;
@@ -25,10 +27,16 @@ public class Tabuleiro {
 	}
 	
 	public void abrir(int linha, int coluna) {
-		campos.parallelStream()
+		try {
+			campos.parallelStream()
 			.filter(c -> c.getLinha()== linha && c.getColuna() == coluna)
 			.findFirst()
 			.ifPresent(c -> c.abrir());;
+		} catch (ExplosaoException e) {
+			campos.forEach(c -> c.setAberto(true));
+			throw e;
+			
+		}
 	}
 	
 	public void AlterarMarcacao(int linha, int coluna) {
@@ -64,9 +72,9 @@ public class Tabuleiro {
 		
 		do {
 			
-			minasArmadas = campos.stream().filter(minado).count();
-			int aleatorio = (int)(Math.random()* campos.size());
+			int aleatorio = (int)(Math.random() * campos.size());
 			campos.get(aleatorio).minar();
+			minasArmadas = campos.stream().filter(minado).count();
 			
 		}while(minasArmadas < quantidadeMinas);
 	}
