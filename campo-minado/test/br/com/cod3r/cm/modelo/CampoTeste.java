@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.cod3r.cm.excecao.explosaoException;
+import br.com.cod3r.cm.excecao.ExplosaoException;
 
 public class CampoTeste {
 	
@@ -92,7 +92,7 @@ public class CampoTeste {
 	void testeAbrirMinadoNaoMarcado() {
 		campo.minar();
 		
-		assertThrows(explosaoException.class, () ->{
+		assertThrows(ExplosaoException.class, () ->{
 			campo.abrir();
 		});
 		
